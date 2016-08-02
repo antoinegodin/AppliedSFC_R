@@ -1,0 +1,32 @@
+#######Determination of output - eq. 4.1
+y = cons + g 
+#######Disposable income - eq. 4.2
+yd = y - t + r * b_h
+#######Tax payments - eq. 4.3
+theta = t / (y + r * b_h)
+#######consumption demand - eq. 4.4
+alpha1 = (cons - alpha2*v) / yd
+#######Demand for government bills - eq. 4.7
+lambda1 = (b_h - v*(lambda0 - lambda2*(yd/v))) / (r*v)
+#######Supply of government bills - eq. 4.8
+g = t - r *b_h
+#######Interest rate as policy instrument - eq. 4.11
+r = r_bar
+#######  PARAMETERS
+alpha2=0.3
+lambda0 = 0.635
+lambda2 = 0.01
+#######  EXOGENOUS
+cons=925990
+t=736728
+r_bar = 0.044
+#######  Starting values for stocks
+b_cb = 417791
+b_h = 1253373
+b_s = 1671165
+h_h = 417791
+h_s = 417791
+r = 0.044
+v = 1671165
+#######End of model
+timeline 2005 2010

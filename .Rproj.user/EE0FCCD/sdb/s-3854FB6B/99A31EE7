@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "##################################################################################\n################ uploading libraries and setting working directory ###############\n##################################################################################\n\n\nlibrary(PKSFC)\nlibrary(\"Rgraphviz\")\n\n\nsetwd(\"C:/Users/Federico/Desktop/SFC-Simulation-model/Model-2/\")\n\n\n##################################################################################\n######################### Running the model ######################################\n##################################################################################\n\n\npc<-sfc.model(\"PcModel_ITA2.txt\",modelName=\"Portfolio Choice Model\")\n\npc<-sfc.check(pc,fill=FALSE)\n\nplot_graph_hierarchy(graph=generate.DAG.collaspe(adjacency=t(pc$matrix))$orginal_graph, main=\"PC\" )\n\ndatapc<-simulate(pc)\n\nnames(datapc)\n\ntryITA<-datapc$baseline\n\npc$equations\n\npar(mfrow=c(2,2))\nplot (1:100, tryITA[,1],type = \"l\",xlab=\"time\",ylim = c(1407569, 1707569),ylab=\"Income\",main=\"\",col=1)\n\n\n################################################################################\n### First scenario: reducing expenditure through the debt to income ratio#######\n################################################################################\n\n\n\npc<-sfc.addScenario(model=pc,vars=\"austerity_exp\",values=(1),inits=5,ends=100)\n\n\ndatapc<-simulate(pc)\n\nnames(datapc)\n\ntryITAscenario1<-datapc$scenario_1\n\n\nmatplot (1:100, tryITA[,1],type = \"l\",xlab=\"time\",ylim = c(0, 1707569),ylab=\"Income\",main=\"\",col=1)\nlines (1:100, tryITAscenario1[,1],type = \"l\",xlab=\"\",ylab=\"\",main=\"\",col = 2)\n\n\n###################################################################################\n### second scenario: increasing taxes thorugh the debt to income ratio ############\n###################################################################################\n\npc<-sfc.addScenario(model=pc, vars=\"austerity_taxes\",values=(1),inits=5,ends=100)\n\ndatapc<-simulate(pc)\n\nnames(datapc)\n\ntryITAscenario2<-datapc$scenario_2\n\n\nmatplot (1:100, tryITA[,1],type = \"l\",xlab=\"time\",ylim = c(1500000, 1627569),ylab=\"Income\",main=\"\",col=1)\nlines (1:100, tryITAscenario2[,1],type = \"l\",xlab=\"\",ylab=\"\",main=\"\",col = 2)\n\n\n##################################################################################\n################# third scenario: increasing the interest rate ###################\n##################################################################################\n\n\npc<-sfc.addScenario(model=pc, vars=\"r_bar\",values=(0.06),inits=5,ends=100)\n\ndatapc<-simulate(pc)\n\nnames(datapc)\n\ntryITAscenario3<-datapc$scenario_3\n\n\nmatplot (1:100, tryITA[,1],type = \"l\",xlab=\"time\",ylim = c(1600000, 1657569),ylab=\"Income\",main=\"\",col=1)\nlines (1:100, tryITAscenario3[,1],type = \"l\",xlab=\"\",ylab=\"\",main=\"\",col = 2)\n\n###################################################################################\n################################  THE END #########################################\n###################################################################################",
+    "created" : 1469981646146.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2919953668",
+    "id" : "99A31EE7",
+    "lastKnownWriteTime" : 1424773268,
+    "last_content_update" : 1424773268,
+    "path" : "C:/Users/ku57637/Dropbox/Research/Seminars/AppliedSFC_R/Exercise/RunPcModel_ITA_3.R",
+    "project_path" : "Exercise/RunPcModel_ITA_3.R",
+    "properties" : {
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

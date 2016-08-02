@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#1. EQUATIONS\nYd = W*N - T\nT = theta*W*N\nC = alpha1*Yd + alpha2*H_h(-1)\nH = H(-1) + G - T\nH_h = H_h(-1) + Yd - C\nY = C + G\nN = Y/W\n#2. PARAMETERS\nalpha1=0.6\nalpha2=0.4\ntheta=0.2\n#EXOGENOUS\nG=20\nW=1\n#INITIAL VALUES\nH=0\nH_h=0\n#3. Timeline\ntimeline 1945 2010",
+    "created" : 1463066760300.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2979331067",
+    "id" : "66B6EFAC",
+    "lastKnownWriteTime" : 1470171865,
+    "last_content_update" : 1470171865988,
+    "path" : "C:/Users/ku57637/Dropbox/Research/Seminars/AppliedSFC_R/SIM.txt",
+    "project_path" : "SIM.txt",
+    "properties" : {
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "text"
+}

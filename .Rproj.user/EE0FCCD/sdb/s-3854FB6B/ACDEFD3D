@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#######Determination of output - eq. 4.1\ny = cons + g \n#######Disposable income - eq. 4.2\nyd = y - t + r * b_h\n#######Tax payments - eq. 4.3\ntheta = t / (y + r * b_h)\n#######consumption demand - eq. 4.4\nalpha1 = (cons - alpha2*v) / yd\n#######Demand for government bills - eq. 4.7\nlambda1 = (b_h - v*(lambda0 - lambda2*(yd/v))) / (r*v)\n#######Supply of government bills - eq. 4.8\ng = t - r *b_h\n#######Interest rate as policy instrument - eq. 4.11\nr = r_bar\n#######  PARAMETERS\nalpha2=0.3\nlambda0 = 0.635\nlambda2 = 0.01\n#######  EXOGENOUS\ncons=925990\nt=736728\nr_bar = 0.044\n#######  Starting values for stocks\nb_cb = 417791\nb_h = 1253373\nb_s = 1671165\nh_h = 417791\nh_s = 417791\nr = 0.044\nv = 1671165\n#######End of model\ntimeline 2005 2010",
+    "created" : 1469981825799.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "566841842",
+    "id" : "ACDEFD3D",
+    "lastKnownWriteTime" : 1425555822,
+    "last_content_update" : 1425555822,
+    "path" : "C:/Users/ku57637/Dropbox/Research/Seminars/AppliedSFC_R/Exercise/PcSS_ITA_3.txt",
+    "project_path" : "Exercise/PcSS_ITA_3.txt",
+    "properties" : {
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "text"
+}

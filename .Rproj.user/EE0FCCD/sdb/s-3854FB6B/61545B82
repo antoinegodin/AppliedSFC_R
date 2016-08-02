@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#1\nY=C+G+I\nC=alpha1*YDe+alpha2*V(-1)\nI=Lnew+eta*(u(-1)-uT)*K(-1)\nu=Y/(K*prK)\nFu=eta*(u(-1)-uT)*K(-1)\nLnew=lambdaT*K(-1)-L(-1)\nlambdaT=lambdaT(-1)+beta*Fb(-1)\nK=K(-1)*(1-delta)+I\nYDe=YD(-1)\nYD=Y-iL*L(-1)-Fu+Fb-Tax\nTax=theta*(Y-iL*L(-1)+Fb)\nV=V(-1)+YD-C\nB=B(-1)+G-Tax\nFb=iL*L(-1)-NPL\nNPL=gamma0+gamma1*iL*L(-1)/Y\nL=L(-1)+Lnew-NPL\nD=V-B\n#Calibration\nCALIBRATION\n#TimeLine\ntimeline 1 200",
+    "created" : 1470039505820.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "195775178",
+    "id" : "61545B82",
+    "lastKnownWriteTime" : 1468571396,
+    "last_content_update" : 1468571396,
+    "path" : "~/Dropbox/Research/Seminars/Minsky/model/model.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
