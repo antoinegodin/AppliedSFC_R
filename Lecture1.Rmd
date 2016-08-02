@@ -2,7 +2,8 @@
 title: "Applied SFC modelling with R"
 author: "Antoine Godin"
 date: "03 August 2016"
-output: pdf_document
+output: slidy_presentation
+runtime: shiny
 bibliography: Bibliography.bib
 ---
 
@@ -18,7 +19,6 @@ library(knitr)
 - pdfetch
 - PKSFC package
 - SFC visualisation
-  * Flow Diagrams
   * Direct Acyclical Graphs
   * Sankey diagrams
   * Shiny Applications
@@ -46,7 +46,7 @@ names<-c("B9")
 
 # Downloading the data by specifying the various filters
 UKdata_raw = pdfetch_EUROSTAT(flowRef = "nasa_10_nf_tr", UNIT="CP_MNAC",NA_ITEM=names, GEO="UK", 
-      DIRECT="PAID",SECTOR=c("S11","S12","S13","S14_S15","S2"))
+                              DIRECT="PAID",SECTOR=c("S11","S12","S13","S14_S15","S2"))
 
 # Transforming the obtained data into a data.frame
 UKdata<-as.data.frame(UKdata_raw)
@@ -76,7 +76,7 @@ names<-c("B5G","D5","D61","D62","D7","D8","B6G","P3","B8G","P5G","D9","NP","B9")
 
 # Obtaining the data
 EZdata_raw = pdfetch_EUROSTAT("nasa_10_nf_tr", UNIT="CP_MNAC",NA_ITEM=names, GEO="EU28",
-        SECTOR=c("S14_S15"), TIME="2014")
+                              SECTOR=c("S14_S15"), TIME="2014")
 
 # Transforming the data into a data.frame
 EZdata<-as.data.frame(EZdata_raw)
@@ -92,8 +92,8 @@ for(i in 1:length(coln)){
   newname<-paste(tname[3:4],collapse=".")
   # If the column contains only NA, remove it from the dataset
   if(!is.na(EZdata[16,i])){
-   newcoln<-c(newcoln,newname) 
-   HHdata<-c(HHdata,EZdata[16,i])
+    newcoln<-c(newcoln,newname) 
+    HHdata<-c(HHdata,EZdata[16,i])
   }
 }
 
@@ -103,40 +103,40 @@ colnames(HHdata)<-newcoln
 
 # Creating the aggregates
 HHdata_1<-as.data.frame(c(HHdata$PAID.B5G,-HHdata$PAID.D5,-HHdata$PAID.D61+HHdata$RECV.D61,
-      +HHdata$RECV.D62-HHdata$PAID.D62,-HHdata$PAID.D7+HHdata$RECV.D7,HHdata$PAID.B6G))
+                          +HHdata$RECV.D62-HHdata$PAID.D62,-HHdata$PAID.D7+HHdata$RECV.D7,HHdata$PAID.B6G))
 colnames(HHdata_1)<-"2014"
 rownames(HHdata_1)<-c("Total Income","Taxes","Social Contributions","Social Benefits",
-      "Other transfers","Gross Disposable Income")
+                      "Other transfers","Gross Disposable Income")
 kable(HHdata_1)
 
 HHdata_2<-as.data.frame(c(HHdata$PAID.B6G,-HHdata$PAID.P3,-HHdata$PAID.D8+HHdata$RECV.D8,
-      HHdata$PAID.B8G))
+                          HHdata$PAID.B8G))
 colnames(HHdata_2)<-"2014"
 rownames(HHdata_2)<-c("Gross Disposable Income","Consumption","Adjustments in Pensions",
-      "Gross Savings")
+                      "Gross Savings")
 kable(HHdata_2)
 
 HHdata_3<-as.data.frame(c(HHdata$PAID.B8G,-HHdata$PAID.P5G,-HHdata$PAID.D9+HHdata$RECV.D9,
-      -HHdata$PAID.NP,HHdata$PAID.B9))
+                          -HHdata$PAID.NP,HHdata$PAID.B9))
 
 colnames(HHdata_3)<-"2014"
 rownames(HHdata_3)<-c("Gross Savings","Gross Capital Formation","Capital Transfer",
-      "Net Non-Produced NF Assets","Net Lending Position")
+                      "Net Non-Produced NF Assets","Net Lending Position")
 kable(HHdata_3)
 ```
 
 ## PKSFC package
 
 - Allowing to simulate SFC models in an open source environment}
-  * Still preliminary
-  * Only one numerical solver: Gauss-Seidel algorithm (Kinsella and O'Shea 2010)
-  * github.com/s120/pksfc
+* Still preliminary
+* Only one numerical solver: Gauss-Seidel algorithm (Kinsella and O'Shea 2010)
+* github.com/s120/pksfc
 - Technical aspect
-  * R package
-  * EViews translator
-  * Read equation files
-  * Build model from console
-  * Visualisation/Design tools and helpers
+* R package
+* EViews translator
+* Read equation files
+* Build model from console
+* Visualisation/Design tools and helpers
 
 ## Installing the dependent libraries and the package
 You need to install all the required libraries This is for traditional libraries
@@ -235,9 +235,9 @@ print(sim)
 
 ## Output data structure
 - Output is a list of matrix where each element of the list are a scenario
-  * baseline
-  * scenario_i
-  
+* baseline
+* scenario_i
+
 ```{r}
 kable(datasim$baseline)
 ```
@@ -248,10 +248,10 @@ kable(datasim$baseline)
 Solving $Ax=b,\, A\in\mathbb{R}^{n\times n},\, b\in \mathbb{R}^n$ via an iterative algorithm, where each iteration can be represented by $L x^{k+1} = b-Ux^{k},\, A=L+U$. Where $L$ is lower triangular and $U$ is upper triangular. 
 
 - Pseudo-code:
-  1. Select initial values $x^0$
-  2. While $k<maxIter$ \& $\delta < tolValue$
-    a. For each $i=1,...,n$: $$x_i^{k+1}=\frac{1}{a_{ii}}\left( b_i-\sum^{i-1}_{j=1}a_{ij} x_j^{k+1}-\sum_{j=i+1}^n a_{ij}x_j^k\right)$$
-    b. Compute $\delta$: $$\delta = \frac{x^{k+1}-x^k}{x^k}$$
+1. Select initial values $x^0$
+2. While $k<maxIter$ \& $\delta < tolValue$
+a. For each $i=1,...,n$: $$x_i^{k+1}=\frac{1}{a_{ii}}\left( b_i-\sum^{i-1}_{j=1}a_{ij} x_j^{k+1}-\sum_{j=i+1}^n a_{ij}x_j^k\right)$$
+b. Compute $\delta$: $$\delta = \frac{x^{k+1}-x^k}{x^k}$$
 
 ## System of (in)dependent equations
 > See Fenell et. al (2016) 
@@ -270,9 +270,9 @@ plot.dag(simex,main="SIMEX" )
 ```
 
 - Asside from the mathematical implication that a system of equation represent, it also has an economic meaning:
-  * the economy represented by SIM will adjust in one period to any shock applied to government spending. 
-  * for SIMEX it is not the case because consumption depend on expected disposable income which is equal to previous period disposable income. 
-  * in this case, the economy represented by SIMEX will adjust slowly to a shock applied to government spending, via the stocks (and particularly the buffer stock)
+* the economy represented by SIM will adjust in one period to any shock applied to government spending. 
+* for SIMEX it is not the case because consumption depend on expected disposable income which is equal to previous period disposable income. 
+* in this case, the economy represented by SIMEX will adjust slowly to a shock applied to government spending, via the stocks (and particularly the buffer stock)
 
 ## In the case of a more complex model - Chapter 6
 
@@ -371,8 +371,8 @@ kable(round(t(dataex$baseline[c(1,2,20,40,66),c("G","Y","T","Yd","Yd_e","C","H",
 
 ## Output data structure
 - Output is a list of matrix where each element of the list are a scenario
-  * baseline
-  * scenario_i
+* baseline
+* scenario_i
 - In the result matrix, there is a column indicating the number of iteration in the Gauss-Seidel algorithm per block of equations per period
 
 ```{r}
@@ -400,22 +400,14 @@ kable(round(t(dataex$baseline[c(1,2,20,40,66),c("iter block 1","iter block 2","i
 
 ## Buffer stocks, using model PC
 
+- Observe the buffer role of money, in case of random shocks applied to expected disposable income
+- we need to modify slightly model pc and change the equations determining 
+* consumption, 
+* demand for bonds and money, 
+* expectations on income and wealth
 
 ```{r}
 pc<-sfc.model("PC.txt",modelName="Portfolio Choice Model")
-plot.dag(pc,main="PC" )
-```
-
-## Changing the model: expectations and random shocks
-
-- Observe the buffer role of money, in case of random shocks applied to expected disposable income
-- we need to modify slightly model pc and change the equations determining 
-  * consumption, 
-  * demand for bonds and money, 
-  * expectations on income and wealth
-
-```{r}
-
 # Changing Existing equations
 pcRand<-sfc.editEqus(pc,list(
   list(var="cons",eq="alpha1*yde+alpha2*v(-1)"),
@@ -450,10 +442,122 @@ legend(x=1950,y=1.2*max(datapcRand$baseline[,c("h_h","h_d")],na.rm=T),
 ```
 
 - This graph highlights the buffer role of certain stocks in PK-SFC models.
-  * expectations are incorrect 
-  * demand might not be equal to supply in any market
+* expectations are incorrect 
+* demand might not be equal to supply in any market
 - one stock will not be equal to the targeted level, as highlighted by @Foley:1975, in a model without perfect foresight you need a buffer stock in order to obtain equilibrium between demand and supply. 
 - The role of buffer stocks in PK-SFC model is thus fundamental and is at the hart of the approach used by @Godley:1999c in his seven unsustainable processes. - It is by observing the dynamics of certain stock-flow norms that you are able to observe the unsustainable processes evolving in an economy, because stocks precisely absorb disequilibrium.
 
+## Sankey Diagrams
 
-# References
+```{r, eval=F}
+plot.sankey(as.data.frame(datapcRand$baseline),filename="TFM_PC.csv",period=2)
+```
+
+```{r, echo=F}
+numericInput("period", "Which period?", 2)
+renderSankeyNetwork({
+  test=plot.sankey(as.data.frame(datapcRand$baseline),filename="TFM_PC.csv",period=input$period)
+  test
+})
+```
+
+## Shiny Apps
+
+```{r,echo=F,message=FALSE,eval=T}
+fluidPage(
+  
+  titlePanel("Model SIMEX"),
+  
+  
+  mainPanel(
+    tabsetPanel(
+      tabPanel("Equations", renderTable({
+        simex<-sfc.model("SIMEX.txt",modelName="SIMplest model")
+        temp<-as.data.frame(simex$equations[,c(1,2)])
+        colnames(temp)<-c("Variable","Equation")
+        temp
+        #matrix(c(getwd(),list.dirs(getwd())),ncol=1)
+      })),
+      tabPanel("DAG",  renderPlot({
+        simex<-sfc.model("SIMEX.txt",modelName="SIMplest model")
+        plot.dag(simex,main="SIMEX")
+      })),
+      tabPanel("Plot Scenarios",fluidRow(
+        column(12,checkboxGroupInput("checkGroup",
+                                     label = h4("Variables"),
+                                     inline=T,
+                                     choices = list("Consumption" = "C","Disposable Income" = "Yd",
+                                                    "Taxes" = "T", "Government Expenditure" = "G",
+                                                    "GDP" = "Y", "Expected disposable income" = "Yd_e",
+                                                    "Household wealth" = "H"),
+                                     selected = c("Yd_e","Yd"))),
+        column(12, renderPlot({
+          simex<-sfc.model("SIMEX.txt",modelName="SIMplest model")
+          vars<-c()
+          values<-c()
+          if(input$alpha1!=as.numeric(simex$variables[9,2])){
+            vars<-c(vars,"alpha1")
+            values<-c(values,input$alpha1)
+          }
+          if(input$alpha2!=as.numeric(simex$variables[10,2])){
+            vars<-c(vars,"alpha2")
+            values<-c(values,input$alpha2)
+          }
+          if(input$theta!=as.numeric(simex$variables[11,2])){
+            vars<-c(vars,"theta")
+            values<-c(values,input$theta)
+          }
+          if(input$G!=as.numeric(simex$variables[12,2])){
+            vars<-c(vars,"G")
+            values<-c(values,input$G)
+          }
+          if(length(vars)>0){
+            simex<-sfc.addScenario(model=simex,vars=list(vars),values=list(values),inits=1975,ends=2010)
+            datasimex<-simulate(simex)
+            myData<-as.data.frame(datasimex$baseline)
+            myData1<-as.data.frame(datasimex$scenario_1)
+            #PLace 3, runs every time somtheing changes in the widgets
+            varnames<-input$checkGroup
+            matplot(rownames(myData),cbind(myData[c(varnames)],myData1[c(varnames)]),type="l",xlab="",ylab="",lwd=2,lty=c(rep(1,length(varnames)),rep(2,length(varnames))),col=1:length(varnames))
+            legend("topleft",col=1:length(varnames),bty='n',lwd=2,lty=c(rep(1,length(varnames)),rep(2,length(varnames))),legend=c(varnames,paste(varnames,"_scen",sep="")))
+          }else{
+            datasimex<-simulate(simex)
+            myData<-as.data.frame(datasimex$baseline)
+            #PLace 3, runs every time somtheing changes in the widgets
+            varnames<-input$checkGroup
+            matplot(rownames(myData),myData[c(varnames)],type="l",xlab="",ylab="",lwd=2,lty=1)
+            legend("topleft",col=1:length(varnames),bty='n',lwd=2,lty=1,legend=varnames)
+          }
+          
+        })),
+        column(6,sliderInput("alpha1",
+                             label = "Propensity to consume out of income:",
+                             min = 0, max = 1, value = 0.6),
+               
+               sliderInput("alpha2",
+                           label = "Propensity to consume out of wealth:",
+                           min = 0, max = 1, value = 0.4)),
+        column(6,
+               sliderInput("theta",
+                           label = "Taxation out of income rate:",
+                           min = 0, max = 1, value = 0.2),
+               sliderInput("G",
+                           label = "Government Expenditure",
+                           min = 0, max = 100, value = 20)
+        )
+      )
+      )
+    )
+  )
+)
+
+```
+
+## Example of Shiny Apps
+
+[Model SIM](http://antoinegodin.shinyapps.io/SIMple)
+[Model SIMEX](http://antoinegodin.shinyapps.io/SIMEX)
+[Agent Based Version of SIM](http://antoinegodin.shinyapps.io/AB-SFC)
+[GitHub Repository](http://github.com/antoinegodin/ShinySFC)
+
+## References

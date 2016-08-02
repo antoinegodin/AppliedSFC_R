@@ -1,0 +1,9 @@
+,households,production,government,central bank
+Consumption,-cons,cons,,
+Government Expenditures,,g,-g,
+Income,y,-y,,
+Interests,int_h,,-int,int_cb
+Central Bank Profits,,,prof,-prof
+Taxes,-t,,t,
+Change in Money,-delta_h,,,delta_h
+Change in Bills,-delta_b_h,,delta_b,-delta_b_cb

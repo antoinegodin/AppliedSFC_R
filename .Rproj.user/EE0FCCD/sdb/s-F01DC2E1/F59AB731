@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#######Determination of output - eq. 4.1\ny = cons + g\n#######Disposable income - eq. 4.2\nyd = y - t + int_h\n#######Tax payments - eq. 4.3\nt = theta*(y + int_h)\n#######Wealth accumulation - eq. 4.4\nv = v(-1) + (yd - cons)\n#######Consumption function - eq. 4.5\ncons = alpha1*yd + alpha2*v(-1)\n#######Cash money - eq. 4.6\nh_h = v - b_h  \n#######Demand for government bills - eq. 4.7\nb_h = v*(lambda0 + lambda1*r - lambda2*(yd/v))\n#######Supply of government bills - eq. 4.8\nb_s = b_s(-1) + (g + int) - (t + prof)\n#######Supply of cash - eq. 4.9\nh_s = h_s(-1) + b_cb - b_cb(-1)\n#######Government bills held by the central bank - eq. 4.10\nb_cb = b_s - b_h\n#######Interest rate as policy instrument - eq. 4.11\nr = r_bar\n#######FOR SANKEY\n# Households Interests\nint_h=r(-1)*b_h(-1)\n# CB Interests\nint_cb=r(-1)*b_cb(-1)\n# Gov Interests\nint=r(-1)*b_s(-1)\n# Change in households money\ndelta_h=h_h - h_h(-1)\n# Change in households bonds\ndelta_b_h=b_h - b_h(-1)\n# Change in cb bonds\ndelta_b_cb=b_cb - b_cb(-1)\n# Change in government bonds\ndelta_b=b_s - b_s(-1)\n# Central Bank profits\nprof=int_cb\n#######  PARAMETERS\nalpha1=0.6\nalpha2=0.4\nlambda0 = 0.635\nlambda1 = 5\nlambda2 = 0.01\ntheta=0.2\n#######  EXOGENOUS\ng=20\nr_bar = 0.025\n#######  Starting values for stocks\nb_cb = 21.62162\nb_h = 64.86486\nb_s = 86.48649\nh_h = 21.62162\nh_s = 21.62162\nr = 0.025\nv = 86.48649\n#######End of model\ntimeline 1945 2010",
+    "created" : 1470174156821.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3418165432",
+    "id" : "F59AB731",
+    "lastKnownWriteTime" : 1470177162,
+    "last_content_update" : 1470177162281,
+    "path" : "C:/Users/ku57637/Dropbox/Research/Seminars/AppliedSFC_R/PC.txt",
+    "project_path" : "PC.txt",
+    "properties" : {
+    },
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "text"
+}

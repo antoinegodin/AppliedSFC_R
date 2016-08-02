@@ -1,9 +1,9 @@
 #######Determination of output - eq. 4.1
 y = cons + g
 #######Disposable income - eq. 4.2
-yd = y - t + r(-1)*b_h(-1)
+yd = y - t + int_h
 #######Tax payments - eq. 4.3
-t = theta*(y + r(-1)*b_h(-1))
+t = theta*(y + int_h)
 #######Wealth accumulation - eq. 4.4
 v = v(-1) + (yd - cons)
 #######Consumption function - eq. 4.5
@@ -13,13 +13,30 @@ h_h = v - b_h
 #######Demand for government bills - eq. 4.7
 b_h = v*(lambda0 + lambda1*r - lambda2*(yd/v))
 #######Supply of government bills - eq. 4.8
-b_s = b_s(-1) + (g + r(-1)*b_s(-1)) - (t + r(-1)*b_cb(-1))
+b_s = b_s(-1) + (g + int) - (t + prof)
 #######Supply of cash - eq. 4.9
 h_s = h_s(-1) + b_cb - b_cb(-1)
 #######Government bills held by the central bank - eq. 4.10
 b_cb = b_s - b_h
 #######Interest rate as policy instrument - eq. 4.11
 r = r_bar
+#######FOR SANKEY
+# Households Interests
+int_h=r(-1)*b_h(-1)
+# CB Interests
+int_cb=r(-1)*b_cb(-1)
+# Gov Interests
+int=r(-1)*b_s(-1)
+# Change in households money
+delta_h=h_h - h_h(-1)
+# Change in households bonds
+delta_b_h=b_h - b_h(-1)
+# Change in cb bonds
+delta_b_cb=b_cb - b_cb(-1)
+# Change in government bonds
+delta_b=b_s - b_s(-1)
+# Central Bank profits
+prof=int_cb
 #######  PARAMETERS
 alpha1=0.6
 alpha2=0.4
