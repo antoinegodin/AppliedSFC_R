@@ -16,6 +16,8 @@ library(knitr)
 
 
 ## Outline
+> All the code can be found here: [http://github.com/antoinegodin/AppliedSFC_R](http://github.com/antoinegodin/AppliedSFC_R)
+
 - pdfetch
 - PKSFC package
 - SFC visualisation
@@ -269,7 +271,7 @@ plot.dag(sim,main="SIM" )
 plot.dag(simex,main="SIMEX" )
 ```
 
-- Asside from the mathematical implication that a system of equation represent, it also has an economic meaning:
+- Aside from the mathematical implication that a system of equation represent, it also has an economic meaning:
 * the economy represented by SIM will adjust in one period to any shock applied to government spending. 
 * for SIMEX it is not the case because consumption depend on expected disposable income which is equal to previous period disposable income. 
 * in this case, the economy represented by SIMEX will adjust slowly to a shock applied to government spending, via the stocks (and particularly the buffer stock)
