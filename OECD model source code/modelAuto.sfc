@@ -1,0 +1,342 @@
+#TODO
+#Shouldn't we follow the National Accounts construction to get to nominal GD and then deflate it to get to the real GDP?
+############
+#Parameters#
+############
+#Public expenditure
+g= 7233401.6022157 
+#Productivity of labor
+xi_nc= 71.4277447640137 
+xi_ng= 0.0206161908095226 
+xi_nd= 0.0520090268253678 
+#Productivity of capital, consumption sector
+xi_kc= 0.709890667003084 
+#Productivity of capital, dirty energy sector
+xi_kd= 8.76 
+#Productivity of capital, green energy sector
+xi_kg= 8.76 
+#Energy productivity range from 2 to 3.3
+xi_ec= 4197.21448402133 
+#Productivity of dirty energy imputs
+xi_rd= 0.4 
+#Productivity of green energy imputs
+xi_rg= 0 
+#Capacity factor for dirty energy production
+eta_d= 0.85 
+#Capacity factor for green energy production
+eta_g= 0.267906737 
+#Prices of inputs
+Prd= 17.18609 
+Prg= 0 
+#Life of capital for dirty energy production
+LTd= 35 
+#Life of capital for dirty energy production
+LTg= 25 
+#Mark-ups
+phie= 1.78131907839421 
+phic= 1.16665737314721 
+#Growth function
+gamma0c= 0 
+gamma1c= 0.22051721651288 
+gamma2c= 0 
+gamma0d= 0 
+gamma1d= 0.0626136218937416 
+gamma2d= -0.462954023815396 
+gamma0g= -0.141395803541973 
+gamma1g= 2.28007354226131 
+gamma2g= 0.230285759117947 
+#Depreciation rate
+delta= 0.1 
+#Subsides and taxes on energy prices
+taud= 0 
+#Consumption function
+alpha0= 0 
+alpha1= 0.824040097831395 
+alpha2= 0.116491196183354 
+#Tax rate
+theta= 0.363759589742897 
+#Expectation parameter
+nu= 0.1 
+#Wages
+W= 33.5642479703871 
+#R&D
+RandD= 0 
+#Interest rates settings
+kappa= 0 
+rb= 0.01 
+#Price of Dirty energy Capital
+Pkd= 1571.428571 
+#Price of Green energy Capital
+Pkg= 3964.285714 
+################
+#INITIAL VALUES#
+################
+ukc= 0.757017678103963 
+ukd= 0.555224243048555 
+ukg= 1 
+kd= 2492.66 
+kg= 223.24 
+kc= 73597293.49278 
+Kd= 3917037.14178886 
+Kg= 884987.14279336 
+Kc= 84210894.0291844 
+iLc= 0.04 
+iLd= 0.04 
+iLg= 0.07 
+ib= 0.307903488748593 
+yd= 25221505.1033145 
+y= 39599876.2 
+c= 23657160.8851195 
+yde= 25221505.1033145 
+D= 35182250.0570562 
+d= 30748021.5361231 
+B= 39093110.2801309 
+Bs= 39093110.2801309 
+Pc= 1.14421183215719 
+Ld= 5005723.81076661 
+Lg= 1063759.17997513 
+Lc= 29112767.0663144 
+L= 35182250.0570562 
+retc= 0.0929970664864026 
+retg= 0.0695122737860599 
+taug= 2.04910062877574 
+######Growth rates
+grgexp= 0.022990322421015 
+grprnc= 0.0131406248170043 
+grprng= 0.107117115277561 
+grprnd= 0.107117115277561 
+grw= 0.0246921801035815 
+grprec= 0.00487997387029477 
+grprd= 0 
+betag= -1.46725404243489 
+###########
+#The MODEL#
+###########
+#real government growth
+g=g(-1)*(1+grgexp)
+#Labor productivity growth
+xi_nc=xi_nc(-1)*(1+grprnc)
+xi_kc=xi_kc(-1)*(1+grprnc)
+xi_ng=xi_ng(-1)*(1+grprng)
+xi_nd=xi_nd(-1)*(1+grprnd)
+#Electricity productivity growth
+xi_ec=xi_ec(-1)*(1+grprec)
+xi_ed=xi_nd*xi_ec/xi_nc
+xi_eg=xi_ng*xi_ec/xi_nc
+Prd=Prd(-1)*(1+grprd)
+#Wage growth
+W=W(-1)*(1+grw)
+#Subsidies
+taug=exp(log(taug(-1))+betag)
+#Real GDP
+y=Y/Pc
+#Nominal gdp
+Y=C+G+Ic+Id+Ig
+#Consumption output
+y_c=c+g+ic
+#Dirty energy output
+y_d=id
+#Green energy output
+y_g=ig
+#Growth rates (%)
+gy=(y-y(-1))/y(-1)
+gY=(Y-Y(-1))/Y(-1)
+gc=(c-c(-1))/c(-1)
+gic=(ic-ic(-1))/ic(-1)
+gid=(id-id(-1))/id(-1)
+gig=(ig-ig(-1))/ig(-1)
+ge=(e-e(-1))/e(-1)
+ged=(ed-ed(-1))/ed(-1)
+geg=(eg-eg(-1))/eg(-1)
+#Employment in the consumption sector
+Nc=y_c/xi_nc
+#Employment in the dirty energy sector
+Nd=y_d/xi_nd
+#Employment in the green energy sector
+Ng=y_g/xi_ng
+#Capacity utilisation consumption sector
+kcu=y/xi_kc
+#Capacity utilisation dirty energy sector
+kdu=ed/xi_kd
+#Capacity utilisation green energy sector
+kgu=eg/xi_kg
+#Energy utilisation
+e=y_c/xi_ec+y_d/xi_ed+y_g/xi_eg
+#Dirty fuel utilisation
+rd=ed/xi_rd
+#Green fuel utilisation
+#rg=eg/xi_rg
+rg=0
+#Capacity utilisation rate consumption sector
+#ukc=kcu/kc(-1)
+#Available capital stock, dirty energy sector
+kdA=eta_d*kd(-1)
+#Available capital stock, green energy sector
+kgA=eta_g*kg(-1)
+#Capacity utilisation rate dirty energy sector
+ukd=kdu/kdA
+#Capacity utilisation rate green energy sector
+ukg=kgu/kgA
+# Total Variable cost, dirty energy sector
+VCd=Prd*rd
+# Total Variable cost, green energy sector
+VCg=Prg*rg
+# Unit Variable cost, dirty energy sector
+UVCd=Prd/xi_rd
+# Unit Variable cost, green energy sector
+UVCg=Prg/xi_rg
+#Capital recovery factor, dirty energy sector
+alphad=(iLd*(1+iLd)^LTd)/((1+iLd)^(LTd)-1)
+#Capital recovery factor, green energy sector
+alphag=(iLg*(1+iLg)^LTg)/((1+iLg)^(LTg)-1)
+#Unit costs, dirty energy sector
+UCd=alphad*Kd(-1)/ed+UVCd
+#Unit costs, green energy sector
+UCg=alphag*Kg(-1)/eg
+#Price of energy
+Pe=(1+phie)*UVCd
+#Green energy production
+z1=e>xi_kg*kgA
+eg=z1*xi_kg*kgA+(1-z1)*e
+#Dirty energy production
+#ed=z1*(e-eg)+(1-z1)*xi_kd*kdA
+ed=z1*(e-eg)
+#Shares of total energy produced by dirty/green sources
+shareed=ed/e
+shareeg=eg/e
+#Growth function, consumption sector
+grc=gamma0c+gamma1c*retc(-1)+gamma2c*iLc(-1)*Lc(-1)/Kc(-1)
+#Growth function, dirty energy sector
+grd=gamma0d+gamma1d*ukd(-1)+gamma2d*iLd(-1)*Ld(-1)/Kd(-1)
+#grd=gamma0d+gamma1d*ukd(-1)
+#Growth function, green energy sector
+grg=gamma0g+gamma1g*retg(-1)+gamma2g*ukg(-1)
+#grg=gamma0g+gamma1g*ukg(-1)
+#Real investment, consumption sector
+ic=max((grc+delta)*kc(-1),0)
+#Real investment, dirty energy sector
+id=max((grd+1/LTd)*kd(-1),0)
+#Real investment, green energy sector
+ig=max((grg+1/LTg)*kg(-1),0)
+#Shares of new capacity additions
+shareid=id/(id+ig)
+shareig=ig/(id+ig)
+#Nominal investment, consumption sector
+Ic=ic*Pc
+#Nominal investment, dirty energy sector
+Id=id*Pkd
+#Nominal investment, green energy sector
+Ig=ig*Pkg
+#Real capital stock, consumption sector
+kc=kc(-1)*(1-delta)+ic
+#Real capital stock, dirty energy sector
+kd=kd(-1)*(1-1/LTd)+id
+#Real capital stock, green energy sector
+kg=kg(-1)*(1-1/LTg)+ig
+#Nominal capital stock, consumption sector
+Kc=kc*Pc
+#Nominal capital stock, dirty energy sector
+Kd=kd*Pkd
+#Nominal capital stock, green energy sector
+Kg=kg*Pkg
+#Consumption function
+c=alpha0+alpha1*yde+alpha2*d(-1)
+#Nominal consumption
+C=c*Pc
+#Nominal disposable income
+YD=W*N+FDb+FDc+FDg+FDd
+#Total employment
+N=Nc+Ng+Nd
+#Taxes
+Taxes=theta*Y
+#Real disposable income, alla Haig Simons
+yd=YD/Pc+pic*d(-1)
+#Inflation
+pic=(Pc-Pc(-1))/Pc(-1)
+#Expected disposable income
+yde=yd(-1)+nu*(yde(-1)- yd(-1))
+#Deposits
+D=D(-1)+YD-C
+#Real deposits
+d=D/Pc
+#Consumption price
+Pc=(1+phic)*UCc
+#Consumption price
+Pkd=(1+phic)*UCkd
+#Consumption price
+Pkg=(1+phic)*UCkg
+#Homogeneized GDP
+gdphom=c+g+ic+id*xi_nc/xi_nd+ig*xi_nc/xi_ng
+#unit cost of debt service
+ucdebt=iLc(-1)*Lc(-1)/gdphom
+#Unit Costs, consumption sector (TAXES TO BE MOVED)
+UCc=W/xi_nc+Pe/xi_ec+sharec*ucdebt
+#Interests share
+sharec=(c+g+ic)/gdphom
+#Unit Costs, consumption sector (TAXES TO BE MOVED)
+UCkd=W/xi_nd+Pe/xi_ed+shared*ucdebt
+#Interests share
+shared=id*xi_nc/(gdphom*xi_nd)
+#Unit Costs, consumption sector
+UCkg=W/xi_ng+Pe/xi_eg+shareg*ucdebt
+#Interests share
+shareg=ig*xi_nc/(gdphom*xi_ng)
+#Profits, consumption sector
+Fc=Y+Prd*rd-W*N-Pe*e-iLc(-1)*Lc(-1)-Taxes
+#Dividends
+z2=Lc(-1)+Ic-Fc<0
+FDc=z2*(Fc-Ic-Lc(-1))
+#return rate
+retc=Fc/Kc
+#Profits, dirty energy sector
+Fd=ed*Pe-Prd*rd-iLd(-1)*Ld(-1)-subsg
+#Dividends
+z3=Ld(-1)+Id-Fd<0
+FDd=z3*(Fd-Id-Ld(-1))
+#Profits, green energy sector
+Fg=eg*Pe-Prg*rg-iLg(-1)*Lg(-1)+subsg
+#subsidies to green
+subsg=eg*Pe*taug
+#Dividends
+z4=Lg(-1)+Ig-Fg<0
+FDg=z4*(Fg-Ig-Lg(-1))
+#return rate
+retg=Fg/Kg
+#Loans, consumption sector
+Lc=Lc(-1)+Ic-Fc+FDc
+#Loans, dirty energy sector
+Ld=Ld(-1)+Id-Fd+FDd
+#Loans, green energy sector
+Lg=Lg(-1)+Ig-Fg+FDg
+#Banks profits
+Fb=ib(-1)*B(-1)+iLc(-1)*Lc(-1)+iLd(-1)*Ld(-1)+iLg(-1)*Lg(-1)
+#Distributed profits from banks
+FDb=Fb-(B-B(-1))
+#Government expenditures
+G=g*Pc
+#Bonds supply
+Bs=Bs(-1)+G+ib(-1)*B(-1)-Taxes
+#Bs=Bs(-1)+G+ib(-1)*B(-1)-Taxes
+#Bond demand
+B=Bs
+#Interest rates, consumption sector
+#iLc=ib*(1+1/(1+exp(kappa*(retc-rb))))
+iLc=iLc(-1)
+#Interest rates, dirty energy sector
+#iLd=ib*(1+1/(1+exp(kappa*(retd-rb))))
+iLd=iLd(-1)
+#Interest rates, green energy sector
+#iLg=ib*(1+1/(1+exp(kappa*(retg-rb))))
+iLg=iLg(-1)
+#Average return rate, consumption sector
+#retc=(Fc(-1)/Kc(-2)+Fc(-2)/Kc(-3)+Fc(-3)/Kc(-4)+Fc(-4)/Kc(-5))/5
+#Average return rate, dirty energy sector
+#retd=(Fd(-1)/Kd(-2)+Fd(-2)/Kd(-3)+Fd(-3)/Kd(-4)+Fd(-4)/Kd(-5))/5
+#Average return rate, green energy sector
+#retg=(Fg(-1)/Kg(-2)+Fg(-2)/Kg(-3)+Fg(-3)/Kg(-4)+Fg(-4)/Kg(-5))/5
+#Interest rates on bonds
+ib=ib(-1)
+#Total Loans
+L=Lc+Lg+Ld
+#Timeline
+timeline 2011 2040

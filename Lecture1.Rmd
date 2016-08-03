@@ -141,6 +141,7 @@ kable(HHdata_3)
 * Visualisation/Design tools and helpers
 
 ## Installing the dependent libraries and the package
+
 You need to install all the required libraries This is for traditional libraries
 ```{r, eval=F}
 install.packages("expm")

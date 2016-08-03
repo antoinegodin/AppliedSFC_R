@@ -1,0 +1,106 @@
+#Public expenditure
+g= 7233401.6022157 
+#Productivity of labor
+xi_nc= 71.4277447640137 
+xi_ng= 0.0206161908095226 
+xi_nd= 0.0520090268253678 
+#Productivity of capital, consumption sector
+xi_kc= 0.709890667003084 
+#Productivity of capital, dirty energy sector
+xi_kd= 8.76 
+#Productivity of capital, green energy sector
+xi_kg= 8.76 
+#Energy productivity range from 2 to 3.3
+xi_ec= 4197.21448402133 
+#Productivity of dirty energy imputs
+xi_rd= 0.4 
+#Productivity of green energy imputs
+xi_rg= 0 
+#Capacity factor for dirty energy production
+eta_d= 0.85 
+#Capacity factor for green energy production
+eta_g= 0.267906737 
+#Prices of inputs
+Prd= 17.18609 
+Prg= 0 
+#Life of capital for dirty energy production
+LTd= 35 
+#Life of capital for dirty energy production
+LTg= 25 
+#Mark-ups
+phie= 1.78131907839421 
+phic= 1.16665737314721 
+#Growth function
+gamma0c= 0 
+gamma1c= 0.22051721651288 
+gamma2c= 0 
+gamma0d= 0 
+gamma1d= 0.0626136218937416 
+gamma2d= -0.462954023815396 
+gamma0g= -0.141395803541973 
+gamma1g= 2.28007354226131 
+gamma2g= 0.230285759117947 
+#Depreciation rate
+delta= 0.1 
+#Subsides and taxes on energy prices
+taud= 0 
+#Consumption function
+alpha0= 0 
+alpha1= 0.824040097831395 
+alpha2= 0.116491196183354 
+#Tax rate
+theta= 0.363759589742897 
+#Expectation parameter
+nu= 0.1 
+#Wages
+W= 33.5642479703871 
+#R&D
+RandD= 0 
+#Interest rates settings
+kappa= 0 
+rb= 0.01 
+#Price of Dirty energy Capital
+Pkd= 1571.428571 
+#Price of Green energy Capital
+Pkg= 3964.285714 
+################
+#INITIAL VALUES#
+################
+ukc= 0.757017678103963 
+ukd= 0.555224243048555 
+ukg= 1 
+kd= 2492.66 
+kg= 223.24 
+kc= 73597293.49278 
+Kd= 3917037.14178886 
+Kg= 884987.14279336 
+Kc= 84210894.0291844 
+iLc= 0.04 
+iLd= 0.04 
+iLg= 0.07 
+ib= 0.307903488748593 
+yd= 25221505.1033145 
+y= 39599876.2 
+c= 23657160.8851195 
+yde= 25221505.1033145 
+D= 35182250.0570562 
+d= 30748021.5361231 
+B= 39093110.2801309 
+Bs= 39093110.2801309 
+Pc= 1.14421183215719 
+Ld= 5005723.81076661 
+Lg= 1063759.17997513 
+Lc= 29112767.0663144 
+L= 35182250.0570562 
+retc= 0.0929970664864026 
+retg= 0.0695122737860599 
+taug= 2.04910062877574 
+######Growth rates
+grgexp= 0.022990322421015 
+grprnc= 0.0131406248170043 
+grprng= 0.107117115277561 
+grprnd= 0.107117115277561 
+grw= 0.0246921801035815 
+grprec= 0.00487997387029477 
+grprd= 0 
+betag= -1.46725404243489 

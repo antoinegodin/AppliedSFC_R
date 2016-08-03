@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : ",households,production,government,central bank\nConsumption,-cons,cons,,\nGovernment Expenditures,,g,-g,\nIncome,y,-y,,\nInterests,int_h,,-int,int_cb\nCentral Bank Profits,,,prof,-prof\nTaxes,-t,,t,\nChange in Money,-delta_h,,,delta_h\nChange in Bills,-delta_b_h,,delta_b,-delta_b_cb\n",
+    "created" : 1470216305858.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "848435417",
+    "id" : "2B540113",
+    "lastKnownWriteTime" : 1470179899,
+    "last_content_update" : 1470179899,
+    "path" : "C:/Users/ku57637/Dropbox/Research/Seminars/AppliedSFC_R/TFM_PC.csv",
+    "project_path" : "TFM_PC.csv",
+    "properties" : {
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "text"
+}
