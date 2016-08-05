@@ -2,8 +2,7 @@
 title: "Applied SFC modelling with R"
 author: "Antoine Godin"
 date: "03 August 2016"
-output: slidy_presentation
-runtime: shiny
+output: pdf_document
 bibliography: Bibliography.bib
 ---
 
@@ -456,17 +455,18 @@ legend(x=1950,y=1.2*max(datapcRand$baseline[,c("h_h","h_d")],na.rm=T),
 plot.sankey(as.data.frame(datapcRand$baseline),filename="TFM_PC.csv",period=2)
 ```
 
-```{r, echo=F}
+```{r, echo=F,eval=F}
 numericInput("period", "Which period?", 2)
 renderSankeyNetwork({
   test=plot.sankey(as.data.frame(datapcRand$baseline),filename="TFM_PC.csv",period=input$period)
   test
 })
 ```
+![Example of Sankey Diagram](SANKEY.png)
 
 ## Shiny Apps
 
-```{r,echo=F,message=FALSE,eval=T}
+```{r,echo=F,message=FALSE,eval=F}
 fluidPage(
   
   titlePanel("Model SIMEX"),
@@ -555,6 +555,7 @@ fluidPage(
 )
 
 ```
+![Example of Shiny Application](SHINY.png)
 
 ## Example of Shiny Apps
 

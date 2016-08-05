@@ -1,8 +1,8 @@
 library(PKSFC)
 library("Rgraphviz")
 
-#This needs to be done
-pcss<-sfc.model("PcSS.txt",modelName="Portfolio Choice Model Steady State")
+#This is done with values corresponding to Italy (thanks to Federico Bassi and Florian Botte)
+pcss<-sfc.model("PcSS_ITA.txt",modelName="Portfolio Choice Model Steady State")
 
 #Visual Check 
 plot.dag(pcss, main="Steady State PC" )
@@ -19,7 +19,19 @@ sink("calibration.txt")
 cat("#Example of parameter\n")
 cat(paste("g=",dataSS$g[t],"\n"))
 cat(paste("alpha2=",dataSS$alpha2[t],"\n"))
-...
+cat(paste("alpha1=",dataSS$alpha2[t],"\n"))
+cat(paste("theta=",dataSS$theta[t],"\n"))
+cat(paste("lambda0=",dataSS$lambda0[t],"\n"))
+cat(paste("lambda1=",dataSS$lambda1[t],"\n"))
+cat(paste("lambda2=",dataSS$lambda2[t],"\n"))
+cat(paste("r_bar=",dataSS$r[t],"\n"))
+cat(paste("v=",dataSS$v[t],"\n"))
+cat(paste("b_h=",dataSS$b_h[t],"\n"))
+cat(paste("b_s=",dataSS$b_s[t],"\n"))
+cat(paste("h_s=",dataSS$h_s[t],"\n"))
+cat(paste("h_h=",dataSS$h_h[t],"\n"))
+cat(paste("b_cb=",dataSS$b_cb[t],"\n"))
+cat(paste("r=",dataSS$r[t],"\n"))
 sink()
 
 #Loading up the model without calibration
@@ -45,6 +57,8 @@ plot.dag(PC)
 
 # Simulate the model
 datapc<-simulate(PC)
+result<-as.data.frame(datapc$baseline)
+result$year<-rownames(result)
 
 #Plotting results - GDP and components
 names<-c("y","cons","g")

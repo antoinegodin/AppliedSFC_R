@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(PKSFC)\nlibrary(\"Rgraphviz\")\n\n#This is done with values corresponding to Italy (thanks to Federico Bassi and Florian Botte)\npcss<-sfc.model(\"PcSS_ITA.txt\",modelName=\"Portfolio Choice Model Steady State\")\n\n#Visual Check \nplot.dag(pcss, main=\"Steady State PC\" )\n\n#Find the numerical Steady State\ndatapcss<-simulate(pcss)\n\n#Format the results\ndataSS<-as.data.frame(datapcss$baseline)\n\n#Generate the calibration file\nt=2\nsink(\"calibration.txt\")\ncat(\"#Example of parameter\\n\")\ncat(paste(\"g=\",dataSS$g[t],\"\\n\"))\ncat(paste(\"alpha2=\",dataSS$alpha2[t],\"\\n\"))\ncat(paste(\"alpha1=\",dataSS$alpha2[t],\"\\n\"))\ncat(paste(\"theta=\",dataSS$theta[t],\"\\n\"))\ncat(paste(\"lambda0=\",dataSS$lambda0[t],\"\\n\"))\ncat(paste(\"lambda1=\",dataSS$lambda1[t],\"\\n\"))\ncat(paste(\"lambda2=\",dataSS$lambda2[t],\"\\n\"))\ncat(paste(\"r_bar=\",dataSS$r[t],\"\\n\"))\ncat(paste(\"v=\",dataSS$v[t],\"\\n\"))\ncat(paste(\"b_h=\",dataSS$b_h[t],\"\\n\"))\ncat(paste(\"b_s=\",dataSS$b_s[t],\"\\n\"))\ncat(paste(\"h_s=\",dataSS$h_s[t],\"\\n\"))\ncat(paste(\"h_h=\",dataSS$h_h[t],\"\\n\"))\ncat(paste(\"b_cb=\",dataSS$b_cb[t],\"\\n\"))\ncat(paste(\"r=\",dataSS$r[t],\"\\n\"))\nsink()\n\n#Loading up the model without calibration\nmodelLines<-readLines(\"PC.txt\")\n\n#Loading up the calibration\ncalibrationLines<-readLines(\"calibration.txt\")\n\n#Finding the calibration to be added\nindexCalib<-grep(\"CALIBRATION\",modelLines)\n\n#Adding the calibration into the model\ntotModel<-c(modelLines[1:(indexCalib-1)],calibrationLines,modelLines[(indexCalib+1):length(modelLines)])\n\n#Writing the complete model\nwriteLines(totModel,\"PCCalibrated.txt\")\n\n#Loading the model\nPC<-sfc.model(\"PCCalibrated.txt\",modelName=\"PC\")\n\n#Check the DAG\nplot.dag(PC)\n\n# Simulate the model\ndatapc<-simulate(PC)\nresult<-as.data.frame(datapc$baseline)\nresult$year<-rownames(result)\n\n#Plotting results - GDP and components\nnames<-c(\"y\",\"cons\",\"g\")\nmatplot(result$year,result[names],type=\"l\",lty=1,lwd=2,col=1:7,ylab=\"units\",xlab=\"\")\nlegend(\"topleft\",lwd=2,bty='n',col=1:7,lty=1,legend=c(\"Output\",\"Consumption\",\"Govt. Expenditure\"))\n\n#Plot the sankey\nplot.sankey(as.data.frame(datapc$baseline),filename=\"TFM_PC.csv\",period=2)\n",
+    "created" : 1470394163320.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2738957415",
+    "id" : "771A89D3",
+    "lastKnownWriteTime" : 1470404718,
+    "last_content_update" : 1470404718598,
+    "path" : "C:/Users/ku57637/Dropbox/Research/Seminars/AppliedSFC_R/Exercise/Solution.R",
+    "project_path" : "Exercise/Solution.R",
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
